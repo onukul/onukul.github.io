@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Study Hub — Class XI</title>
+  <style>
+    :root{
+      --card-bg: #ffffffdd;
+      --glass: rgba(255,255,255,0.12);
+      --text: #243044;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, Arial, sans-serif;
+      color:var(--text);
+      background: linear-gradient(135deg,#ffecd2 0%,#fcb69f 50%,#a1c4fd 100%);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+    header{
+      width:100%;
+      padding:28px 20px;
+      text-align:center;
+      background:linear-gradient(90deg, rgba(0,0,0,0.08), rgba(255,255,255,0.03));
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    header h1{margin:0;font-size:1.6rem;letter-spacing:0.2px}
+    header p{margin:6px 0 0;color:#2b2b2b88}
+
+    main{
+      width:100%;
+      max-width:980px;
+      padding:28px 20px;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:20px;
+      align-items:start;
+    }
+
+    .panel{
+      background:var(--card-bg);
+      border-radius:12px;
+      padding:18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .intro h2{margin-top:0}
+    .intro p{margin:8px 0 0;color:#444}
+
+    .subjects {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .subject-tile{
+      flex:1 1 140px;
+      min-width:120px;
+      padding:12px;
+      border-radius:10px;
+      text-align:center;
+      color:white;
+      font-weight:600;
+      cursor:pointer;
+      user-select:none;
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+    .subject-tile:hover { transform:translateY(-6px); box-shadow:0 12px 30px rgba(0,0,0,0.12); }
+
+    /* tiles (visual only) */
+    .s-english{background:linear-gradient(135deg,#6a89ff,#8ec5ff)}
+    .s-account{background:linear-gradient(135deg,#7bd389,#29cc97)}
+    .s-econ{background:linear-gradient(135deg,#ffd166,#ff9a76)}
+    .s-maths{background:linear-gradient(135deg,#a8edea,#fed6e3);color:#223}
+    .s-business{background:linear-gradient(135deg,#fbc2eb,#a6c1ee)}
+    .s-compsci{background:linear-gradient(135deg,#c3cfe2,#cfd9df);color:#223}
+
+    aside .card{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    select#folderSelect{
+      width:100%;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,0.08);
+      font-size:1rem;
+      background:var(--glass);
+      color:var(--text);
+    }
+
+    a.btn{
+      display:inline-block;
+      text-decoration:none;
+      padding:10px 14px;
+      border-radius:8px;
+      background:#2b2bff;
+      color:white;
+      font-weight:600;
+      box-shadow:0 6px 18px rgba(43,43,255,0.12);
+    }
+
+    .downloads a{display:block;color:#1a3aa6;text-decoration:none;padding:8px 0}
+    .downloads a:hover{color:#0b2166}
+
+    footer{width:100%;text-align:center;padding:18px 10px;color:#3338;margin-top:26px}
+    @media (max-width:920px){
+      main{grid-template-columns:1fr; padding:18px}
+    }
+  </style>
+  <script>
+    function openFolder(sel){
+      const v = sel.value;
+      if(!v) return;
+      const encoded = encodeURI(v) + '/';
+      window.location.href = encoded;
+    }
+    function goTo(folder){
+      window.location.href = encodeURI(folder) + '/';
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Study Hub — Class XI (Half-yearly 2025–26)</h1>
+    <p>Organize notes, PDFs and quick links by subject.</p>
+  </header>
+
+  <main>
+    <section class="panel intro">
+      <h2>Subjects</h2>
+      <div class="subjects">
+        <div class="subject-tile s-english" onclick="goTo('English')">English</div>
+        <div class="subject-tile s-account" onclick="goTo('Accountancy')">Accountancy</div>
+        <div class="subject-tile s-econ" onclick="goTo('Economics')">Economics</div>
+        <div class="subject-tile s-maths" onclick="goTo('Maths')">Maths</div>
+        <div class="subject-tile s-business" onclick="goTo('Business Studies')">Business Studies</div>
+        <div class="subject-tile s-compsci" onclick="goTo('Computer Science')">Computer Science</div>
+      </div>
+
+      <h3 style="margin-top:18px">Quick jump (dropdown)</h3>
+      <select id="folderSelect" onchange="openFolder(this)">
+        <option value="">-- Select subject --</option>
+        <option value="English">English</option>
+        <option value="Accountancy">Accountancy</option>
+        <option value="Economics">Economics</option>
+        <option value="Maths">Maths</option>
+        <option value="Business Studies">Business Studies</option>
+        <option value="Computer Science">Computer Science</option>
+      </select>
+    </section>
+
+    <aside class="panel card">
+      <div>
+        <strong>Downloads</strong>
+        <div class="downloads" style="margin-top:10px">
+          <a href="schedule.pdf" target="_blank">📅 Exam Schedule (schedule.pdf)</a>
+          <a href="syllabus.pdf" target="_blank">📘 Syllabus (syllabus.pdf)</a>
+        </div>
+      </div>
+
+      <div style="margin-top:14px">
+        <strong>Project</strong>
+        <p style="margin:8px 0 0">Drop subject files into each folder and they'll be discoverable from the subject page.</p>
+        <a class="btn" href="#setup" style="margin-top:12px">Setup instructions</a>
+      </div>
+    </aside>
+  </main>
+
+  <footer id="setup">
+    <small>Setup: create folders named <code>English</code>, <code>Accountancy</code>, <code>Economics</code>, <code>Maths</code>, <code>Business Studies</code>, and <code>Computer Science</code>. Put each subject's <code>index.html</code> inside its folder. Store <code>schedule.pdf</code> and <code>syllabus.pdf</code> in the same folder as this file.</small>
+  </footer>
+</body>
+</html>
